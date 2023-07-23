@@ -1,5 +1,8 @@
 import requests
 import random
+from bs4 import BeautifulSoup
+
+
 
 
 user_agent = [
@@ -16,5 +19,11 @@ header = {
 
 res = requests.get(url, headers = header)
 
+soup = BeautifulSoup(res.text, 'html.parser')
+
+# allPTag = soup.findAll('p')
+# allPTag = soup.find('p', {'class': 'text-xl'})
+allPTag = soup.select('p.text-xl') # this method work like css selector
+
 # print(res.text, "response")
-print(res.request.headers, "Request Headers")
+print(allPTag, "soup content")
